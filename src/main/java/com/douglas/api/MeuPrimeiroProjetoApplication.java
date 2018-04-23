@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.douglas.api.entities.Empresa;
 import com.douglas.api.repositories.EmpresaRepository;
+import com.douglas.api.services.ExemploService;
 import com.douglas.api.utils.SenhaUtils;
 
 @SpringBootApplication
@@ -18,6 +19,9 @@ public class MeuPrimeiroProjetoApplication {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
+
+	@Autowired
+	private ExemploService exemploService;
 	
 	@Value("${paginacao.qtd_por_pagina}")
 	private int qtdPorPagina;
@@ -62,6 +66,8 @@ public class MeuPrimeiroProjetoApplication {
 			this.empresaRepository.delete(1L);
 			empresas = empresaRepository.findAll();
 			System.out.println("Empresas: " + empresas.size());
+			
+			this.exemploService.testarServico();
 		};
 	}
 }
