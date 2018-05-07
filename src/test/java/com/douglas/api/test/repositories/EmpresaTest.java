@@ -1,4 +1,4 @@
-package com.douglas.api.test.repository;
+package com.douglas.api.test.repositories;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
