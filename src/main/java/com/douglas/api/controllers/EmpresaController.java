@@ -1,6 +1,9 @@
 package com.douglas.api.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +17,18 @@ import com.douglas.api.responses.Response;
 public class EmpresaController {
 
 	@PostMapping
-	public ResponseEntity<Response<EmpresaDto>> cadastrar(@RequestBody EmpresaDto empresaDto) {
+	public ResponseEntity<Response<EmpresaDto>> cadastrar(@Valid @RequestBody EmpresaDto empresaDto,
+			BindingResult result) {
 		Response<EmpresaDto> response = new Response<EmpresaDto>();
+		
+		if (result.hasErrors()) {
+			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+			return ResponseEntity.badRequest().body(response);
+		}
+		
 		empresaDto.setId(1L);
 		response.setData(empresaDto);
-		
+
 		return ResponseEntity.ok(response);
 	}
 }
