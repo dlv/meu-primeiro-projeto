@@ -2,6 +2,11 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
+  prod-check:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
@@ -17,8 +22,4 @@ jobs:
           ls ${{ github.workspace }}
       - name: List all the remote branches
         run: git branch -r
-      - name: get Branch develop
-        run: |
-          export BRANCHES=$(git branch -r)
-          echo $BRANCHES | grep develop
       - run: echo "🍏 This job's status is ${{ job.status }}."
