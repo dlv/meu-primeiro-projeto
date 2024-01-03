@@ -32,11 +32,3 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Create new branch develop
-      uses: peterjgrainger/action-create-branch@v2.2.0
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        branch: 'develop'
-        sha: '${{ github.event.pull_request.head.sha }}'
