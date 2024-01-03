@@ -17,4 +17,8 @@ jobs:
           ls ${{ github.workspace }}
       - name: List all the remote branches
         run: git branch -r
+      - name: get Branch
+      run: |
+        export BRANCHES=$(git branch -r)
+        echo $BRANCHES | grep develop
       - run: echo "🍏 This job's status is ${{ job.status }}."
