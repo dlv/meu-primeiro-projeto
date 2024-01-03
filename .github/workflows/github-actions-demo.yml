@@ -23,5 +23,5 @@ jobs:
       - name: List all the remote branches
         run: git branch -r
       - name: Prints the current branch name
-        run: echo "${GITHUB_BRANCH##*/}"
+        run: echo "BRANCH ${{ github.ref }}"
       - run: echo "🍏 This job's status is ${{ job.status }}."
