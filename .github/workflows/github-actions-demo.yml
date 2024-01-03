@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   prod-check:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF"
@@ -22,4 +22,6 @@ jobs:
           ls ${{ github.workspace }}
       - name: List all the remote branches
         run: git branch -r
+      - name: Prints the current branch name
+        run: echo "${GITHUB_BRANCH##*/}"
       - run: echo "🍏 This job's status is ${{ job.status }}."
